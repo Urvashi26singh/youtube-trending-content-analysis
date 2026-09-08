@@ -1,40 +1,43 @@
 # YouTube Trending Content Analysis
 
-An end-to-end **Data Analytics project** analyzing YouTube trending videos to identify content performance, audience engagement, category trends, and top-performing creators.
+An end-to-end **Data Analytics project** analyzing 32,638 cleaned YouTube trending observations to identify content performance, audience engagement, category trends, and top-performing creators.
 
-🔗 **Live Dashboard:** https://yttrendanaly-drgvrhwe.manus.space/
+🌐 **Live Dashboard:** https://yttrendanaly-drgvrhwe.manus.space/
+
+💻 **GitHub Repository:** https://github.com/Urvashi26singh/youtube-trending-content-analysis
 
 ---
 
 ## 📌 Project Overview
 
-This project analyzes **32,638 cleaned YouTube trending observations** to understand:
+This project analyzes YouTube trending content using **Python, Pandas, MySQL, SQL, and Power BI**.
 
-- Which content categories receive the most views
-- Which channels consistently perform well
-- How likes and comments relate to views
-- How trending performance changes over time
-- Which categories show stronger audience engagement
-- What insights can help content creators improve their strategy
+The goal is to transform raw trending-video data into actionable business insights around:
 
-The project combines **Python, Pandas, MySQL, SQL, Power BI, and an interactive analytics dashboard**.
+- Content category performance
+- Video reach and views
+- Audience engagement
+- Creator/channel performance
+- Monthly trending patterns
+- Content strategy recommendations
 
-> **Note:** The analysis is observational and identifies patterns in the dataset. It does not claim that any individual factor directly causes higher performance.
+The project follows an end-to-end analytics workflow:
+
+**Data Cleaning → Database → SQL Analysis → Power BI → Business Insights**
 
 ---
 
 ## 🎯 Business Problem
 
-Content creators publish large amounts of content, but not every video performs equally.
+YouTube creators and content teams need to understand which types of content perform well and how audience engagement differs across categories and creators.
 
-The objective of this analysis is to answer:
+This analysis answers questions such as:
 
-1. Which categories generate the most views?
-2. Which channels have the strongest performance?
-3. Which categories have the highest engagement?
-4. How does trending activity change month by month?
-5. Which videos demonstrate strong growth while trending?
-6. What actionable recommendations can be derived from the data?
+1. Which content categories generate the highest views?
+2. Which channels have strong recurring performance?
+3. Which categories have higher engagement rates?
+4. How does trending activity change over time?
+5. What patterns can help creators improve content strategy?
 
 ---
 
@@ -48,8 +51,6 @@ The objective of this analysis is to answer:
 | Visualization | Power BI |
 | Dashboard | React, TypeScript |
 | Backend | Node.js, tRPC |
-| AI Analyst | Server-side LLM + read-only fallback |
-| Testing | Vitest |
 | Deployment | Manus |
 
 ---
@@ -58,9 +59,9 @@ The objective of this analysis is to answer:
 
 The original dataset contained **37,352 records**.
 
-The cleaning pipeline produced **32,638 valid observations**:
+After data validation and cleaning:
 
-| Cleaning Stage | Records |
+| Stage | Records |
 |---|---:|
 | Original dataset | 37,352 |
 | Invalid video IDs removed | 511 |
@@ -68,27 +69,25 @@ The cleaning pipeline produced **32,638 valid observations**:
 | Removed/error videos | 9 |
 | **Final cleaned dataset** | **32,638** |
 
-Python and Pandas were used for data validation and preparation.
-
-The cleaned data was then loaded into MySQL for analysis.
+Python and Pandas were used for data cleaning and validation before loading the cleaned data into MySQL.
 
 ---
 
 ## 🔎 Analytics Workflow
 
 ```text
-Raw YouTube Dataset
-        ↓
+Raw Dataset
+     ↓
 Python / Pandas
-        ↓
+     ↓
 Data Cleaning & Validation
-        ↓
-MySQL Database
-        ↓
+     ↓
+MySQL
+     ↓
 SQL Analysis
-        ↓
-Power BI / Interactive Dashboard
-        ↓
+     ↓
+Power BI
+     ↓
 Business Insights
-        ↓
-Content Strategy Recommendations
+     ↓
+Recommendations
