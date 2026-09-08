@@ -109,40 +109,77 @@ ORDER BY total_views DESC;
 
 -- 7) JOIN example: compare channel reach with its leading category.
 WITH channel_metrics AS (
-  SELECT channel_title, SUM(views) AS total_views
+  SELECT
+    channel_title,
+    SUM(views) AS total_views
   FROM youtube_videos
   GROUP BY channel_title
-), channel_categories AS (
-  SELECT channel_title, category, SUM(views) AS category_views
+),
+channel_categories AS (
+  SELECT
+    channel_title,
+    category,
+    SUM(views) AS category_views
   FROM youtube_videos
   GROUP BY channel_title, category
+),
+ranked_categories AS (
+  SELECT
+    channel_title,
+    category,
+    category_views,
+    ROW_NUMBER() OVER (
+      PARTITION BY channel_title
+      ORDER BY category_views DESC
+    ) AS category_rank
+  FROM channel_categories
 )
 SELECT
   cm.channel_title,
   cm.total_views,
-  cc.category AS leading_category,
-  cc.category_views
+  rc.category AS leading_category,
+  rc.category_views
 FROM channel_metrics cm
-JOIN channel_categories cc ON cc.channel_title = cm.channel_title
-ORDER BY cm.total_views DESC, cc.category_views DESC;
+JOIN ranked_categories rc
+  ON cm.channel_title = rc.channel_title
+WHERE rc.category_rank = 1
+ORDER BY cm.total_views DESC;
+
 
 -- 8) Month-over-month change using LAG().
 WITH monthly AS (
   SELECT
-    STR_TO_DATE(
-      CONCAT('20', SUBSTRING_INDEX(trending_date, '.', 1), '-', SUBSTRING_INDEX(trending_date, '.', -1), '-', SUBSTRING_INDEX(SUBSTRING_INDEX(trending_date, '.', 2), '.', -1)),
-      '%Y-%m-%d'
-    ) AS trending_day,
+    DATE_FORMAT(
+      STR_TO_DATE(
+        CONCAT(
+          '20',
+          SUBSTRING_INDEX(trending_date, '.', 1),
+          '-',
+          SUBSTRING_INDEX(trending_date, '.', -1),
+          '-',
+          SUBSTRING_INDEX(
+            SUBSTRING_INDEX(trending_date, '.', 2),
+            '.',
+            -1
+          )
+        ),
+        '%Y-%m-%d'
+      ),
+      '%Y-%m'
+    ) AS month,
     SUM(views) AS total_views
   FROM youtube_videos
-  GROUP BY DATE_FORMAT(trending_day, '%Y-%m')
+  GROUP BY month
 )
 SELECT
-  DATE_FORMAT(trending_day, '%Y-%m') AS month,
+  month,
   total_views,
-  total_views - LAG(total_views) OVER (ORDER BY trending_day) AS change_vs_previous_month
+  total_views - LAG(total_views) OVER (
+    ORDER BY month
+  ) AS change_vs_previous_month
 FROM monthly
 ORDER BY month;
+
 
 -- Power BI measure equivalents:
 -- Total Views = SUM(youtube_videos[views])
@@ -150,4 +187,10 @@ ORDER BY month;
 -- Total Comments = SUM(youtube_videos[comment_count])
 -- Trending Observations = COUNTROWS(youtube_videos)
 -- Unique Videos = DISTINCTCOUNT(youtube_videos[video_id])
--- Engagement Rate = DIVIDE([Total Likes] + [Total Comments], [Total Views])
+-- Engagement Rate =
+-- DIVIDE(
+--     [Total Likes] + [Total Comments],
+--     [Total Views],
+--     0
+-- ) * 100
+-- Average Views = DIVIDE([Total Views], [Trending Observations], 0)
