@@ -1,0 +1,19 @@
+Visual QA — 2026-09-08
+
+Desktop 1280x900 full-page screenshot:
+- Existing KPI cards, reach/engagement chart, category mix, top channels, Signal of the week, and AI analyst are still present.
+- New case-study hero, business questions, data-cleaning pipeline, workflow, executive insights, recommendations, SQL analysis, Power BI, limitations, outcome, and resource sections render in one coherent scroll.
+- No visible card overlap or clipped chart content.
+- Data-source links point to the verified public dataset repository; unavailable GitHub/Power BI URLs are not fabricated.
+
+Mobile 390x844 full-page screenshot:
+- Sidebar is collapsed behind the mobile menu trigger and content stacks vertically.
+- KPI cards, chart, table, AI analyst, SQL cards, and portfolio sections remain readable without horizontal page overflow; the channel table uses an internal horizontal scroll container.
+- Long-form page is intentionally scrollable and retains the existing dashboard identity.
+
+Follow-up verification:
+- TypeScript check and Vitest suite passed before screenshot capture; run the production build after this visual QA pass.
+
+Final post-refinement QA:
+
+The updated screenshots confirm that the requested headings — Data Preparation, Executive Insights, Business Recommendations, SQL Analysis, Power BI Dashboard, Technology Stack, Limitations, and Project Outcome — are visible and consistently spaced. The existing dashboard remains intact below the new case-study introduction. Desktop cards and charts remain aligned, while mobile content stacks cleanly; the channel table remains contained in its horizontal-scroll region. Unavailable GitHub and Power BI links are visibly disabled instead of fabricated.

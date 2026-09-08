@@ -1,0 +1,11 @@
+Full-dataset QA — 2026-09-08
+
+The uploaded archive contained youtube_trending_cleaned.csv. Validation confirmed exactly 32,638 rows, all required columns, 16,305 unique video IDs, 17 category names, and raw YouTube dates ranging from 17.01.12 to 18.31.05. The database import confirmed 32,638 rows and preserved repeated trending observations.
+
+The development preview displayed 32,638 of 32,638 records, total views 32.3B, average engagement 2.45%, 32.6K trending observations, and 1.4K active channels with all charts populated. The AI analyst returned 32,638 rows analyzed and an answer derived from the connected database rows.
+
+Browser filter QA confirmed Latest 30 days reduced the dataset to 3,976 rows and recalculated KPIs/charts/top channels. Adding the Entertainment category filter reduced the selected slice to 1,753 rows and recalculated category, channel, monthly, and engagement results. Changing filters clears stale AI analyst output; new questions use the current filter payload.
+
+Verified full-dataset findings include Entertainment as the reach leader, T-Series as the top channel by cumulative views, 2017-12 as the peak full-dataset month, and Pets & Animals as the highest weighted-engagement category. Executive Insights and Business Recommendations now derive from the current backend response rather than hardcoded sample conclusions.
+
+The browser console showed no runtime errors after chart rendering, filtering, and AI analyst execution. Automated tests, TypeScript checks, and production build passed.

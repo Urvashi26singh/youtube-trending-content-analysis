@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1788848441262,
+      "tag": "0000_rich_magneto",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1788848807078,
+      "tag": "0001_flawless_scorpion",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1788852440790,
+      "tag": "0002_magenta_boomerang",
+      "breakpoints": true
+    }
+  ]
+}
