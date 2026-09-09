@@ -51,7 +51,6 @@ This analysis answers questions such as:
 | Visualization | Power BI |
 | Dashboard | React, TypeScript |
 | Backend | Node.js, tRPC |
-| Deployment | Manus |
 
 ---
 
